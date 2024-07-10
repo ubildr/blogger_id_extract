@@ -90,7 +90,8 @@ if st.button("블로거 ID 추출"):
     else:
         st.warning("검색어를 입력해주세요.")
 
-if 'df' in st.session_state:
+# 'df'가 session_state에 있고, 비어있지 않을 때만 다운로드 버튼을 표시
+if 'df' in st.session_state and not st.session_state.df.empty:
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     excel_filename = f"blogger_ids_{current_date}.xlsx"
     
@@ -124,5 +125,3 @@ if 'df' in st.session_state:
         file_name=excel_filename,
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-else:
-    st.warning("먼저 블로거 ID를 추출해주세요.")
